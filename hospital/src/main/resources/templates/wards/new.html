@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New ward</title>
+</head>
+<body>
+
+<form th:method="POST" th:action="@{/wards/new}" th:object="${ward}">
+    <label for="capacity">Enter capacity: </label>
+    <input type="text" th:field="*{capacity}" id="capacity"/>
+    <div style="color:red" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}">Capacity Error</div>
+    <br/>
+    <br/>
+    <br/>
+    <input type="submit" value="check in"/>
+</form>
+<br/>
+<a href="/wards">Return</a>
+</body>
+</html>

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <a th:text="${person.getName() + ' заселен в палату номер ' + person.getWard().getId()}">user</a>
+</div>
+<br/>
+<a href="/hospital">Return to home screen</a>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+</head>
+<body>
+<h1>Registry</h1>
+<a href="people/checkin">Сheck in the patient</a><br/>
+<a href="people/findPerson">Find a patient</a><br/>
+<a href="hospital/adminPanel">Admin Panel</a><br/>
+<br/>
+<br/>
+<form th:action="@{/logout}" th:method="POST">
+    <input type="submit" value="Logout" />
+</form>
+</body>
+</html>

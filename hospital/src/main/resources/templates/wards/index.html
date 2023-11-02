@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Index</title>
+</head>
+<body>
+
+<div th:each="person : ${ward.getPeople()}">
+  <a th:text="${person.getName() + ', ' + person.getAge() + ', ' + person.getGender()}">user</a>
+  <form th:method="DELETE" th:action="@{/people/A{id}(id=${person.getId()})}" th:object="${person}">
+    <input type="submit" value="Delete"/>
+  </form>
+</div>
+
+<br/>
+<hr/>
+
+<form th:method="DELETE" th:action="@{/wards/{id}(id=${ward.getId()})}" th:object="${ward}">
+  <input type="submit" value="Delete ward"/>
+</form>
+<p  class="confirmation-message" th:text="${confmessage}" ></p>
+<br/>
+<hr/>
+<a href="/hospital">Return to home screen</a>
+
+</body>
+</html>

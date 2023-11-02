@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Show</title>
+</head>
+<body>
+
+<div th:each="ward : ${wards}">
+    <a th:href="@{/wards/{id}(id=${ward.getId()})}" th:text="${'Ward number ' + ward.getId() + ' ,Wards capacity:' + ward.getCapacity()}">user</a>
+</div>
+<br/>
+<hr/>
+
+<a href="/wards/new">Create new ward</a>
+<br/>
+<hr/>
+<a href="/hospital">Return to home screen</a>
+
+</body>
+</html>
