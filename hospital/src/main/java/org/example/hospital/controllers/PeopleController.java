@@ -11,11 +11,25 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.Objects;
+
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
     private final PeopleService peopleService;
     private final WardsService wardsService;
+
+    public boolean isCorrectAgeGroup(int age, String ageGroup){
+        System.out.println(ageGroup);
+        if(age<10 && age >=0 && Objects.equals(ageGroup, "children")){
+            return true;
+        }else if(age>=10 && age <=18 && Objects.equals(ageGroup,"teenagers")){
+            return true;
+        }else if (age>18  && Objects.equals(ageGroup,"adults")){
+            return true;
+        }
+        return false;
+    }
 
     @Autowired
     public PeopleController(PeopleService peopleService, WardsService wardsService) {
@@ -38,7 +52,37 @@ public class PeopleController {
 
         for (int i = 0; i < wardsService.findAll().size(); i++) {
 
-            if (!wardsService.findAll().get(i).isFull()){
+            if (!wardsService.findAll().get(i).isFull() && Objects.equals(person.getGender(), wardsService.findAll().get(i).getGender())
+            && isCorrectAgeGroup(person.getAge(), wardsService.findAll().get(i).getAge()))
+            {
+                person.setWard(wardsService.findAll().get(i));
+                peopleService.save(person);
+
+                if(wardsService.findAll().get(i).getCapacity() == wardsService.findAll().get(i).getPeople().size()){
+                    wardsService.updateIsFull(true,wardsService.findAll().get(i).getId());
+                }
+                return "redirect:/people/checkinConfirmed";
+            }
+        }
+
+        for (int i = 0; i < wardsService.findAll().size(); i++) {
+
+            if (!wardsService.findAll().get(i).isFull() && isCorrectAgeGroup(person.getAge(), wardsService.findAll().get(i).getAge()))
+            {
+                person.setWard(wardsService.findAll().get(i));
+                peopleService.save(person);
+
+                if(wardsService.findAll().get(i).getCapacity() == wardsService.findAll().get(i).getPeople().size()){
+                    wardsService.updateIsFull(true,wardsService.findAll().get(i).getId());
+                }
+                return "redirect:/people/checkinConfirmed";
+            }
+        }
+
+        for (int i = 0; i < wardsService.findAll().size(); i++) {
+
+            if (!wardsService.findAll().get(i).isFull())
+            {
                 person.setWard(wardsService.findAll().get(i));
                 peopleService.save(person);
 

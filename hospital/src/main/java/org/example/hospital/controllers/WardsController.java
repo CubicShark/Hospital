@@ -43,12 +43,19 @@ public class WardsController {
         }
         model.addAttribute("ward", wardsService.findById(id));
 
-        model.addAttribute("confmessage", "В палате есть люди!");
+        model.addAttribute("confmessage", "There is people in ward!");
             return "wards/index";
     }
 
     @GetMapping("/new")
     public String createWardG(Model model){
+
+        if(wardsService.findAll().size() >= 8){
+            model.addAttribute("wards",wardsService.findAll());
+            model.addAttribute("confmessage", "Max wards number reached!");
+            return "wards/show";
+        }
+
         model.addAttribute("ward",new Ward());
         return "wards/new";
     }

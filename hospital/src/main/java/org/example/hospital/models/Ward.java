@@ -25,15 +25,23 @@ public class Ward {
     @Column(name = "is_Full")
     private boolean isFull;
 
+    @NotEmpty
+    @Column(name = "gender")
+    private String gender;
+
+    @Column(name = "age")
+    private String age;
+
     @OneToMany(mappedBy = "ward")
     private List<Person> people;
 
     public Ward() {
     }
 
-    public Ward(int capacity, boolean isFull) {
+    public Ward(int capacity, String gender, String age) {
         this.capacity = capacity;
-        this.isFull = isFull;
+        this.gender = gender;
+        this.age = age;
     }
 
     public int getId() {
@@ -62,6 +70,22 @@ public class Ward {
 
     public void setPeople(List<Person> people) {
         this.people = people;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getAge() {
+        return age;
+    }
+
+    public void setAge(String age) {
+        this.age = age;
     }
 
     @Override

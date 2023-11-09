@@ -11,6 +11,19 @@
     <input type="text" th:field="*{capacity}" id="capacity"/>
     <div style="color:red" th:if="${#fields.hasErrors('capacity')}" th:errors="*{capacity}">Capacity Error</div>
     <br/>
+    <select name="gender" id="gender">
+        <option value="" hidden>Select gender</option>
+        <option value="male">male</option>
+        <option value="female">female</option>
+    </select>
+    <br/>
+    <br/>
+    <select name="age" id="age">
+        <option value="" hidden>Select age group</option>
+        <option value="children">children</option>
+        <option value="teenagers">teenagers</option>
+        <option value="adults">adults</option>
+    </select>
     <br/>
     <br/>
     <input type="submit" value="check in"/>
